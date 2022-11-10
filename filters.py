@@ -4,7 +4,7 @@ import config
 
 class IsOwnerFilter(BoundFilter):
     """
-    Custom filter "is_owner".
+    Пользовательский фильтр "is_owner".
     """
     key = "is_owner"
 
@@ -16,7 +16,7 @@ class IsOwnerFilter(BoundFilter):
 
 class IsAdminFilter(BoundFilter):
     """
-    Filter that checks for admin rights existence
+    Фильтр, проверяющий наличие прав администратора
     """
     key = "is_admin"
 
@@ -30,7 +30,7 @@ class IsAdminFilter(BoundFilter):
 
 class MemberCanRestrictFilter(BoundFilter):
     """
-    Filter that checks member ability for restricting
+    Фильтр, проверяющий способность участника ограничивать
     """
     key = 'member_can_restrict'
 
@@ -40,5 +40,4 @@ class MemberCanRestrictFilter(BoundFilter):
     async def check(self, message: types.Message):
         member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
 
-        # I don't know why, but telegram thinks, if member is chat creator, he cant restrict member
         return (member.is_chat_creator() or member.can_restrict_members) == self.member_can_restrict
